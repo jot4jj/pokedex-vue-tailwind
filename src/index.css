@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: flexo-demi;
+}
+
+@font-face {
+    font-family: flexo-demi;
+    src: url('assets/fonts/flexo/Flexo-Demi.woff');
+}
+
+@font-face {
+    font-family: flexo-bold;
+    src: url('assets/fonts/flexo/Flexo-Bold.woff');
+}
+
+@font-face {
+  font-family: flexo-regular;
+  src: url('assets/fonts/flexo/Flexo-Regular.woff');
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
