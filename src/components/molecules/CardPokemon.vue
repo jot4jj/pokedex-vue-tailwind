@@ -1,69 +1,83 @@
 <template>
   <div>
-    <div v-if="loading" class="flex place-items-center w-2/5">
-      <img src="../../assets/img/pikachu.gif" alt="carregando" />
+    <div v-if="loading" class="flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <img src="../../assets/img/pikachu.gif" alt="Carregando" />
     </div>
 
     <div v-else-if="erro">{{ erro }}</div>
 
     <div v-else class="flex flex-col min-h-screen flex-grow">
-      <div class="flex place-items-center justify-evenly">
-        <div>
+      <div class="flex flex-col gap-4 place-items-center w-full justify-evenly md:flex-row">
 
+        <div>
           <input
             type="text"
             v-model="searchTerm"
-            placeholder="Buscar Pokémon..."
-            class="m-4 p-2 rounded-lg w-2/3 xl:w-full"
+            placeholder="Buscar Pokémon"
+            class="bg-gray-300 text-gray-900 placeholder:text-gray-700 w-full m-4 p-2 rounded-lg"
           />
         </div>
 
-        <div>
-          <select name="filtroTipo" class="p-2" v-model="selectedType">
+        <div class="flex gap-12">
+          <select 
+            name="filtroTipo" 
+            class="p-2 bg-gray-300 text-gray-700 rounded-lg" 
+            v-model="selectedType"
+          >
             <option value="">Selecione o tipo</option>
-            <option v-for="type in tipos" :value="type">
+            <option 
+              v-for="type in tipos" 
+              :value="type" 
+              class="text-gray-900"
+            >
               {{ type.charAt(0).toUpperCase() + type.slice(1) }}
             </option>
           </select>
 
           <select
             name="filtroGeracao"
-            class="p-2"
+            class="p-2 bg-gray-300 text-gray-700 rounded-lg"
             v-model.number="selectedGeneration"
           >
             <option value="">Selecione a geração</option>
-            <option v-for="geracao in geracoes" :value="geracao">
+            <option 
+              v-for="geracao in geracoes" 
+              :value="geracao"
+              class="text-gray-900"
+            >
               Geração {{ geracao }}
             </option>
           </select>
         </div> 
       </div>
 
-      <div
-        class="grid grid-cols-1 place-items-center gap-12 mt-16 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:gap-24"
-      >
-        <div class="border-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div class="grid place-items-center m-16">
+        <div class="grid gap-16 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
 
           <div
             v-for="poke in buscarPokemon"
             :key="poke.id"
-            class="flex gap-10"
+            class="flex flex-col gap-2 sm:p-4 md:p-8 xl:p-12 rounded-xl "
           >
-            <img
-              :src="poke.sprites.other['official-artwork'].front_default"
-              :alt="poke.name"
-            />
+            <div>
+                <img
+                  :src="poke.sprites.other['official-artwork'].front_default"
+                  :alt="poke.name"
+                  class="rounded-l-xl p-2"
+                />
+            </div>
 
-            <div class="text-left p-4 tracking-wide">
-              <p class="text-gray-600 text-xl xl:text-lg">
+            <div class="text-left tracking-wide">
+
+              <p class="text-gray-600 text-lg sm:text-lg lg:text-lg ">
                 Nº{{ String(poke.id).padStart(4, "0") }}
               </p>
 
-              <p class="text-gray-950 text-3xl pb-2 xl:text-2xl">
+              <p class="text-gray-950 text-2xl pb-2 xl:text-2xl">
                 {{ capitalize(poke.name) }}
               </p>
 
-              <div class="grid grid-cols-2 gap-2">
+              <div class="grid grid-cols-2 w-3/4 sm:w-full gap-2 place-items-center">
                 <img
                   v-for="(icon, idx) in poke.typeIcons"
                   :key="idx"
@@ -132,6 +146,7 @@ async function fetchPokemon(gen) {
       });
 
       p.typeIcons = await Promise.all(typeIconsPromises)
+
       return p
     })
 
