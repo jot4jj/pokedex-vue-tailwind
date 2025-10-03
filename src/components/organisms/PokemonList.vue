@@ -1,11 +1,9 @@
 <template>
-    <div>
-        <PokemonModal />
-        <CardPokemon />
-    </div>
+  <div>
+    <CardPokemon />
+  </div>
 </template>
 
 <script setup>
-import CardPokemon from '../molecules/CardPokemon.vue';
-import PokemonModal from '../molecules/PokemonModal.vue';
+import CardPokemon from "../molecules/PokemonCard.vue";
 </script>
