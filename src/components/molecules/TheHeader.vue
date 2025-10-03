@@ -10,9 +10,6 @@
             <li>
                 <RouterLink to="/Pokedex">Pokédex</RouterLink>
             </li>
-            <li>
-                <RouterLink to="/Legendaries">Legendaries</RouterLink>
-            </li>
         </ul>
 
         <button @click="menuAberto = !menuAberto" class="sm:flex md:hidden text-3xl text-white border-l-0">
@@ -20,15 +17,12 @@
         </button>
 
         <Transition name="fade">
-            <ul v-show="menuAberto" class="flex flex-col absolute top-20 bg-red-600 right-0 p-4 gap-3 text-center text-white">
+            <ul v-show="menuAberto" class="flex flex-col absolute h-full w-1/3 top-20 bg-red-600 right-0 p-4 gap-3 text-center text-white">
             <li>
                 <RouterLink to="/Home">Home</RouterLink>
             </li>
             <li>
                 <RouterLink to="/Pokedex">Pokédex</RouterLink>
-            </li>
-            <li>
-                <RouterLink to="/Legendaries">Legendaries</RouterLink>
             </li>
         </ul>
         </Transition>
