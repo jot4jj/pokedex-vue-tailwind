@@ -10,46 +10,24 @@
       <div class="flex flex-col gap-4 place-items-center w-full justify-evenly md:flex-row">
 
         <div>
-          <input
-            type="text"
-            v-model="searchTerm"
-            placeholder="Buscar Pokémon"
-            class="bg-gray-300 text-gray-900 placeholder:text-gray-700 w-full m-4 p-2 rounded-lg"
+          <SearchBar v-model="searchTerm" />
+        </div>
+
+        <div>
+          <Filter
+            v-model:modelType="selectedType"
+            v-model:modelGeneration="selectedGeneration"
           />
         </div>
 
-        <div class="flex gap-12">
-          <select 
-            name="filtroTipo" 
-            class="p-2 bg-gray-300 text-gray-700 rounded-lg" 
-            v-model="selectedType"
-          >
-            <option value="">Selecione o tipo</option>
-            <option 
-              v-for="type in tipos" 
-              :value="type" 
-              class="text-gray-900"
-            >
-              {{ type.charAt(0).toUpperCase() + type.slice(1) }}
-            </option>
-          </select>
-
-          <select
-            name="filtroGeracao"
-            class="p-2 bg-gray-300 text-gray-700 rounded-lg"
-            v-model.number="selectedGeneration"
-          >
-            <option value="">Selecione a geração</option>
-            <option 
-              v-for="geracao in geracoes" 
-              :value="geracao"
-              class="text-gray-900"
-            >
-              Geração {{ geracao }}
-            </option>
-          </select>
-        </div> 
       </div>
+
+      <PokemonModal 
+        v-if="pokemonSelecionado"
+        :isOpen="modalAberto" 
+        :pokemon="pokemonSelecionado"
+        @close="modalAberto = false"
+      />
 
       <div class="grid place-items-center m-16">
         <div class="grid gap-16 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
@@ -57,7 +35,8 @@
           <div
             v-for="poke in buscarPokemon"
             :key="poke.id"
-            class="flex flex-col gap-2 sm:p-4 md:p-8 xl:p-12 rounded-xl "
+            class="flex flex-col gap-2 sm:p-4 md:p-8 xl:p-12 rounded-xl cursor-pointer"
+            @click="abrirModal(poke)" 
           >
             <div>
                 <img
@@ -96,7 +75,11 @@
 
 <script setup>
 import axios from "axios";
+import PokemonModal from "./PokemonModal.vue";
+import SearchBar from "../atoms/SearchBar.vue";
+import Filter from "../atoms/Filter.vue";
 import { ref, onMounted, computed, capitalize, watch } from "vue";
+
 
 const todosPokemon = ref([]);
 const searchTerm = ref("");
@@ -105,6 +88,10 @@ const selectedGeneration = ref("");
 const selectedType = ref("");
 const erro = ref(null);
 const loading = ref(true);
+const modalAberto = ref(false);
+const pokemonSelecionado = ref(null);
+const abilities = ref([]); 
+
 
 const tipos = [
   "normal",
@@ -129,28 +116,43 @@ const tipos = [
 
 const geracoes = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
+function abrirModal(poke) {
+  pokemonSelecionado.value = poke;
+  modalAberto.value = true;
+  abilities.value = poke.abilities
+};
+
 async function fetchPokemon(gen) {
   try {
     const listRes = await axios.get(`https://pokeapi.co/api/v2/generation/${gen}`);
-    const species = listRes.data.pokemon_species
+    const species = listRes.data.pokemon_species;
 
     const promises = species.map( async (pokeS) => {
-      const id = pokeS.url.split('/').filter(Boolean).pop()
-      const pokeRes = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
-      const p = pokeRes.data
-      p.typeName = p.types.map((t) => t.type.name)
+
+      const id = pokeS.url.split('/').filter(Boolean).pop();
+      const pokeRes = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+      const p = pokeRes.data;
+
+      p.typeName = p.types.map((t) => t.type.name);
 
       const typeIconsPromises = p.types.map(async (t) => {
         const typeRes = await axios.get(t.type.url);
         return typeRes.data.sprites["generation-viii"]["sword-shield"].name_icon;
       });
 
-      p.typeIcons = await Promise.all(typeIconsPromises)
+      p.typeIcons = await Promise.all(typeIconsPromises);
 
-      return p
+      p.abilities = p.abilities.map( a => a.ability.name)
+
+      p.stats = p.stats.map( s => ({
+        name: s.stat.name,
+        base_stat: s.base_stat
+      }))
+
+      return p;
     })
 
-    todosPokemon.value = await Promise.all(promises)
+    todosPokemon.value = (await Promise.all(promises)).sort((a, b) => a.id - b.id)
 
   } catch (erro) {
     erro.value = "Erro ao buscar Pokemon.";
@@ -158,7 +160,7 @@ async function fetchPokemon(gen) {
   } finally {
     loading.value = false;
   }
-}
+};
 
 const buscarPokemon = computed(() => {
 
@@ -186,7 +188,6 @@ const buscarPokemon = computed(() => {
     if (selectedType.value) {
       lista = lista.filter((p) => p.typeName.includes(selectedType.value));
     }
-
   }
 
   return lista;
@@ -205,6 +206,13 @@ async function buscarPokemonNome(nome) {
 
     p.typeIcons = await Promise.all(typeIconsPromises);
 
+    p.abilities = p.abilities.map( a => a.ability.name)
+
+    p.stats = p.stats.map( s => ({
+      name: s.stat.name,
+      base_stat: s.base_stat
+    }))
+
     searchResult.value = p;
     erro.value = null;
 
@@ -216,18 +224,18 @@ async function buscarPokemonNome(nome) {
 
 watch(selectedGeneration, async (nova) => {
   if (!nova) {
-    await fetchPokemon(1)
+    await fetchPokemon(1);
   } else {
-    await fetchPokemon(nova)
+    await fetchPokemon(nova);
   }
-})
+});
 
 watch(searchTerm, (novoValor) => {
   if (!novoValor) {
     searchResult.value = null;
     erro.value = null;
   } else {
-    buscarPokemonNome(novoValor)
+    buscarPokemonNome(novoValor);
   }
 });
 
