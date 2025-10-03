@@ -85,6 +85,8 @@ import SearchBar from "../atoms/SearchBar.vue";
 import Filter from "../atoms/Filter.vue";
 import { ref, onMounted, computed, capitalize, watch } from "vue";
 
+
+// States principais
 const todosPokemon = ref([]);
 const searchTerm = ref("");
 const searchResult = ref(null);
@@ -96,35 +98,15 @@ const modalAberto = ref(false);
 const pokemonSelecionado = ref(null);
 const abilities = ref([]);
 
-const tipos = [
-  "normal",
-  "fire",
-  "water",
-  "grass",
-  "electric",
-  "ice",
-  "fighting",
-  "poison",
-  "ground",
-  "flying",
-  "psychic",
-  "bug",
-  "rock",
-  "ghost",
-  "dragon",
-  "dark",
-  "steel",
-  "fairy",
-];
-
-const geracoes = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
+// Abre modal dos detalhes do pokemon
 function abrirModal(poke) {
   pokemonSelecionado.value = poke;
   modalAberto.value = true;
   abilities.value = poke.abilities;
 }
 
+
+// Buscar pokémon por geração
 async function fetchPokemon(gen) {
   try {
     const listRes = await axios.get(
@@ -139,8 +121,10 @@ async function fetchPokemon(gen) {
       );
       const p = pokeRes.data;
 
+      // Adiciona o atributo tipo
       p.typeName = p.types.map((t) => t.type.name);
 
+      // Ícones do tipo
       const typeIconsPromises = p.types.map(async (t) => {
         const typeRes = await axios.get(t.type.url);
         return typeRes.data.sprites["generation-viii"]["sword-shield"]
@@ -149,8 +133,10 @@ async function fetchPokemon(gen) {
 
       p.typeIcons = await Promise.all(typeIconsPromises);
 
+      // Habilidades do pokemon
       p.abilities = p.abilities.map((a) => a.ability.name);
 
+      // Status do pokemon
       p.stats = p.stats.map((s) => ({
         name: s.stat.name,
         base_stat: s.base_stat,
@@ -159,9 +145,12 @@ async function fetchPokemon(gen) {
       return p;
     });
 
+
+    // Ordena os pokemon pelo id
     todosPokemon.value = (await Promise.all(promises)).sort(
       (a, b) => a.id - b.id
     );
+
   } catch (erro) {
     erro.value = "Erro ao buscar Pokemon.";
     console.error(erro);
@@ -170,6 +159,7 @@ async function fetchPokemon(gen) {
   }
 }
 
+// lista final filtrada
 const buscarPokemon = computed(() => {
   if (searchResult.value) {
     return [searchResult.value];
@@ -200,6 +190,7 @@ const buscarPokemon = computed(() => {
   return lista;
 });
 
+// busca pokémon por nome
 async function buscarPokemonNome(nome) {
   try {
     const res = await axios.get(
@@ -207,6 +198,7 @@ async function buscarPokemonNome(nome) {
     );
     const p = res.data;
 
+    // Icones do tipo
     const typeIconsPromises = p.types.map(async (t) => {
       const typeRes = await axios.get(t.type.url);
       return typeRes.data.sprites["generation-viii"]["sword-shield"].name_icon;
@@ -214,8 +206,10 @@ async function buscarPokemonNome(nome) {
 
     p.typeIcons = await Promise.all(typeIconsPromises);
 
+    // Habilidades do pokemon
     p.abilities = p.abilities.map((a) => a.ability.name);
 
+    // Status do pokemon
     p.stats = p.stats.map((s) => ({
       name: s.stat.name,
       base_stat: s.base_stat,
@@ -223,12 +217,15 @@ async function buscarPokemonNome(nome) {
 
     searchResult.value = p;
     erro.value = null;
+    
   } catch (err) {
     searchResult.value = null;
     console.error(err);
   }
 }
 
+
+// Watchers (reagir a mudanças de geração e tipo)
 watch(selectedGeneration, async (nova) => {
   if (!nova) {
     await fetchPokemon(1);
@@ -246,6 +243,8 @@ watch(searchTerm, (novoValor) => {
   }
 });
 
+
+// Inicialização ao carregar a página
 onMounted(() => fetchPokemon(1));
 </script>
 
