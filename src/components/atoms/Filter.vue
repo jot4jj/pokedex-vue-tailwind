@@ -12,7 +12,7 @@
         :value="type"
         class="text-gray-900"
       >
-        {{ type.charAt(0).toUpperCase() + type.slice(1) }}
+        {{ capitalize(type) }}
       </option>
     </select>
 
@@ -35,7 +35,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { capitalize, ref, watch } from "vue";
 
 const props = defineProps({
   modelType: String,

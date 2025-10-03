@@ -45,7 +45,7 @@
 
           <div class="flex justify-around w-full gap-2">
             <p v-for="abilitie in pokemon.abilities" class="text-sm sm:text-xl">
-              {{ capitalize(abilitie).replaceAll("-", " ") }}
+              {{ capitalize(abilitie) }}
             </p>
           </div>
         </div>

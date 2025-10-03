@@ -13,6 +13,5 @@
 <script setup>
 const props = defineProps({
     modelValue: String,
-    searchTerm: String
 })
 </script>

@@ -96,13 +96,11 @@ const erro = ref(null);
 const loading = ref(true);
 const modalAberto = ref(false);
 const pokemonSelecionado = ref(null);
-const abilities = ref([]);
 
 // Abre modal dos detalhes do pokemon
 function abrirModal(poke) {
   pokemonSelecionado.value = poke;
   modalAberto.value = true;
-  abilities.value = poke.abilities;
 }
 
 
@@ -217,7 +215,7 @@ async function buscarPokemonNome(nome) {
 
     searchResult.value = p;
     erro.value = null;
-    
+
   } catch (err) {
     searchResult.value = null;
     console.error(err);
