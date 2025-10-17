@@ -22,3 +22,5 @@ O projeto foi criado com foco em **boas práticas de componentização (Atomic D
 ## Link para acesso ao deploy
 
 https://pokedex-vue-tailwind.vercel.app/#/
+
+<img src="https://github.com/jot4jj/pokedex-vue-tailwind/blob/main/src/assets/img/demo.png" alt="Demonstração">
