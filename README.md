@@ -18,3 +18,14 @@ O projeto foi criado com foco em **boas práticas de componentização (Atomic D
 ✅ Exibir **sprites**, **tipos**, **habilidades** e **stats base**  
 ✅ Modal com informações detalhadas  
 ✅ Layout **totalmente responsivo**
+
+## 🧩 Exemplo de uso
+
+### Página Inicial
+Apresenta uma introdução e botão para acessar a Pokédex.
+
+### Página da Pokédex
+Permite buscar Pokémon pelo nome ou aplicar filtros de tipo e geração.
+
+<img src="https://raw.githubusercontent.com/jot4jj/pokedex-vue/main/src/assets/img/demo.png" alt="Demonstração" width="600">
+
