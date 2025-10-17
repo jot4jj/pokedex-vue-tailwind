@@ -18,7 +18,7 @@
 
         <RouterLink to="/Pokedex">
           <button
-            class="mb-6 p-4 text-xl w-3/4 rounded-xl 2xl:w-full bg-gray-800 text-gray-200"
+            class="p-4 text-xl w-3/4 rounded-xl 2xl:w-full bg-gray-800 text-gray-200"
           >
             Explorar Pokémon
           </button>
@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <footer class="w-full text-center bottom-0 py-0  bg-transparent">
+    <footer class="w-full text-center bottom-0 mb-6 bg-transparent">
       <p>
         Made with ❤️ by
         <a
