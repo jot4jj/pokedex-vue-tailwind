@@ -23,4 +23,12 @@ O projeto foi criado com foco em **boas práticas de componentização (Atomic D
 
 https://pokedex-vue-tailwind.vercel.app/#/
 
+## 🧩 Exemplo de uso
+
+### Página Inicial
+Apresenta uma introdução e botão para acessar a Pokédex.
+
+### Página da Pokédex
+Permite buscar Pokémon pelo nome ou aplicar filtros de tipo e geração.
+
 <img src="https://github.com/jot4jj/pokedex-vue-tailwind/blob/main/src/assets/img/demo.png" alt="Demonstração">
