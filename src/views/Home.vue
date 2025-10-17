@@ -33,8 +33,8 @@
         class="object-contain"
       />
     </div>
-    <Footer />
   </div>
+  <Footer />
 </template>
 
 <script setup>

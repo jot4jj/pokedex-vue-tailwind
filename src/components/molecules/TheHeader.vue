@@ -26,7 +26,6 @@
             </li>
         </ul>
         </Transition>
-
     </div>
 </template>
 
