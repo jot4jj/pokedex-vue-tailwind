@@ -18,3 +18,7 @@ O projeto foi criado com foco em **boas práticas de componentização (Atomic D
 ✅ Exibir **sprites**, **tipos**, **habilidades** e **stats base**  
 ✅ Modal com informações detalhadas  
 ✅ Layout **totalmente responsivo**
+
+## Link para acesso ao deploy
+
+https://pokedex-vue-tailwind.vercel.app/#/
