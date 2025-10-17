@@ -1,6 +1,6 @@
 # Pokédex Vue
 
-Uma Pokédex interativa desenvolvida com **Vue 3**, **TailwindCSS** e a **PokéAPI**, permitindo buscar Pokémon por nome, tipo ou geração.  
+Uma Pokédex interativa desenvolvida com **Vue 3**, **TailwindCSS**, **Axios** e a **PokéAPI**, permitindo buscar Pokémon por nome, tipo ou geração.  
 O projeto foi criado com foco em **boas práticas de componentização (Atomic Design)** e uma **UI responsiva e limpa**.
 
 ## 🚀 Tecnologias Utilizadas
