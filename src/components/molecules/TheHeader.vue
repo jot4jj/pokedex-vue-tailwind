@@ -17,7 +17,7 @@
         </button>
 
         <Transition name="fade">
-            <ul v-show="menuAberto" class="flex flex-col absolute h-full w-1/3 top-20 bg-red-600 right-0 p-4 gap-3 text-center text-white">
+            <ul v-show="menuAberto" class="flex flex-col absolute h-full w-1/3 top-20 bg-gray-800 right-0 p-4 gap-3 text-center text-white">
             <li>
                 <RouterLink to="/">Home</RouterLink>
             </li>
