@@ -1,29 +1,20 @@
-# pokedex
+# Pokédex Vue
 
-This template should help get you started developing with Vue 3 in Vite.
+Uma Pokédex interativa desenvolvida com **Vue 3**, **TailwindCSS** e a **PokéAPI**, permitindo buscar Pokémon por nome, tipo ou geração.  
+O projeto foi criado com foco em **boas práticas de componentização (Atomic Design)** e uma **UI responsiva e limpa**.
 
-## Recommended IDE Setup
+## 🚀 Tecnologias Utilizadas
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- ⚡ [Vue 3](https://vuejs.org/) — Framework principal  
+- 🎨 [TailwindCSS](https://tailwindcss.com/) — Estilização moderna e responsiva  
+- 🌐 [Axios](https://axios-http.com/) — Requisições HTTP para a PokéAPI  
+- 🧩 [PokéAPI](https://pokeapi.co/) — Fonte de dados dos Pokémon  
 
-## Customize configuration
+## ⚙️ Funcionalidades
 
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+✅ Buscar Pokémon pelo nome  
+✅ Filtrar por **geração**  
+✅ Filtrar por **tipo**  
+✅ Exibir **sprites**, **tipos**, **habilidades** e **stats base**  
+✅ Modal com informações detalhadas  
+✅ Layout **totalmente responsivo**
