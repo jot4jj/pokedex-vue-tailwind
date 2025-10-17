@@ -19,7 +19,7 @@
 
       <RouterLink to="/Pokedex">
         <button
-          class="p-4 text-xl w-3/4 rounded-xl 2xl:w-full bg-gray-800 text-gray-200"
+          class="mt-4 p-4 text-xl w-3/4 rounded-xl 2xl:w-full bg-gray-800 text-gray-200"
         >
           Explorar Pokémon
         </button>
