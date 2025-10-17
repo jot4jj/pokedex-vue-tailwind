@@ -11,7 +11,7 @@
 
     <div v-else class="flex flex-col min-h-screen flex-grow">
       <div
-        class="flex flex-col gap-4 place-items-center w-full justify-evenly md:flex-row"
+        class="grid grid-cols-1 gap-4 place-items-center justify-evenly md:flex md:flex-row "
       >
         <div>
           <SearchBar v-model="searchTerm" />
@@ -23,6 +23,7 @@
             v-model:modelGeneration="selectedGeneration"
           />
         </div>
+
       </div>
 
       <PokemonModal
