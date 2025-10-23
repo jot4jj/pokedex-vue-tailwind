@@ -1,5 +1,6 @@
 <template>
   <div class="bg-gradient-to-t from-gray-400 to-gray-800 min-h-screen flex flex-col">
+
     <div
       class="grid flex-grow grid-cols-1 place-items-center 2xl:grid-cols-2 p-4"
     >
