@@ -1,6 +1,6 @@
 # Pokédex Vue
 
-Uma Pokédex interativa desenvolvida com **Vue 3**, **TailwindCSS** e a **PokéAPI**, permitindo buscar Pokémon por nome, tipo ou geração.  
+Uma Pokédex interativa desenvolvida com **Vue 3**, **TailwindCSS**, **Axios** e a **PokéAPI**, permitindo buscar Pokémon por nome, tipo ou geração.  
 O projeto foi criado com foco em **boas práticas de componentização (Atomic Design)** e uma **UI responsiva e limpa**.
 
 ## 🚀 Tecnologias Utilizadas
@@ -19,6 +19,10 @@ O projeto foi criado com foco em **boas práticas de componentização (Atomic D
 ✅ Modal com informações detalhadas  
 ✅ Layout **totalmente responsivo**
 
+## Link para acesso ao deploy
+
+https://pokedex-vue-tailwind.vercel.app/#/
+
 ## 🧩 Exemplo de uso
 
 ### Página Inicial
@@ -27,5 +31,4 @@ Apresenta uma introdução e botão para acessar a Pokédex.
 ### Página da Pokédex
 Permite buscar Pokémon pelo nome ou aplicar filtros de tipo e geração.
 
-<img src="https://raw.githubusercontent.com/jot4jj/pokedex-vue/main/src/assets/img/demo.png" alt="Demonstração" width="600">
-
+<img src="https://github.com/jot4jj/pokedex-vue-tailwind/blob/main/src/assets/img/demo.png" alt="Demonstração">
