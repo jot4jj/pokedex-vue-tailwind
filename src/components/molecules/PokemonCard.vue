@@ -9,20 +9,22 @@
 
     <div v-else-if="erro">{{ erro }}</div>
 
-    <div v-else class="flex flex-col min-h-screen flex-grow">
+    <div 
+      v-else 
+      class="flex flex-col min-h-screen flex-grow"
+    >
       <div
-        class="grid grid-cols-1 gap-4 place-items-center justify-evenly md:flex md:flex-row "
+        class="grid grid-cols-1 place-items-center justify-between mx-16 m-4 gap-12 md:flex md:flex-row "
       >
-        <div>
-          <SearchBar v-model="searchTerm" />
-        </div>
 
-        <div>
+          <SearchBar
+            v-model="searchTerm" 
+          />
+
           <Filter
             v-model:modelType="selectedType"
             v-model:modelGeneration="selectedGeneration"
           />
-        </div>
 
       </div>
 
