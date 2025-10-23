@@ -1,8 +1,10 @@
 <template>
-  <div class="flex flex-col items-center md:flex-row gap-12">
+  <div 
+    class="flex flex-col items-center md:flex-row gap-12"
+  >
     <select
       name="filtroTipo"
-      class="p-2 bg-gray-300 text-gray-700 rounded-lg"
+      class="p-2 bg-gray-300 text-gray-700 rounded-lg w-[80vw] md:w-[15vw] lg:w-[20vw]"
       v-model="modelType"
     >
       <option value="">Selecione o tipo</option>
@@ -18,7 +20,7 @@
 
     <select
       name="filtroGeracao"
-      class="p-2 bg-gray-300 text-gray-700 rounded-lg"
+      class="p-2 bg-gray-300 text-gray-700 rounded-lg w-[80vw] md:w-[15vw] lg:w-[20vw]"
       v-model.number="modelGeneration"
     >
       <option value="">Selecione a geração</option>
