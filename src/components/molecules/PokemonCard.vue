@@ -4,7 +4,12 @@
       v-if="loading"
       class="flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
     >
-      <img src="../../assets/img/pikachu.gif" alt="Carregando" />
+      <img 
+        src="../../assets/img/pikachu.gif"
+        alt="Carregando" 
+        class="z-0"
+       />
+       
     </div>
 
     <div v-else-if="erro">{{ erro }}</div>
