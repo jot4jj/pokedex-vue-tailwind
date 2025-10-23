@@ -2,13 +2,18 @@
   <div
     v-if="isOpen"
     class="bg-black bg-opacity-60 w-full h-full grid place-items-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+    @click="closeModal"
   >
-    <div class="bg-gray-200 flex flex-col rounded-xl lg:flex-row">
+    <div
+      class="flex flex-col bottom-0 fixed md:bottom-auto md:flex rounded-xl lg:flex-row bg-gray-200"
+      @click.stop
+    >
       <div>
         <button @click="closeModal" class="absolute">
           <img src="../../assets/img/close.png" alt="close" class="p-4" />
         </button>
       </div>
+
       <div class="flex lg:block justify-center">
         <img
           :src="pokemon.sprites.other['official-artwork'].front_default"
@@ -44,10 +49,13 @@
           <p class="text-sm sm:text-xl">Habilidades</p>
 
           <div class="flex justify-around w-full gap-2">
+
             <p v-for="abilitie in pokemon.abilities" class="text-sm sm:text-xl">
               {{ capitalize(abilitie) }}
             </p>
+
           </div>
+
         </div>
         <div class="grid grid-cols-3 sm:grid-cols-2 gap-2">
           <div v-for="stat in pokemon.stats">
@@ -59,7 +67,7 @@
               >
                 {{ stat.base_stat }}
               </p>
-              <p class="text-sm sm:text-xl">
+              <p class="text-xs sm:text-xl">
                 {{ capitalize(stat.name) }}
               </p>
             </div>
